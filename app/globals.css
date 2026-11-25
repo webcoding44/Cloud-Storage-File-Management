@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  --color-brand-50: #f6f1ff;
+  --color-brand-100: #ede3ff;
+  --color-brand-200: #dac7ff;
+  --color-brand-300: #c0a0ff;
+  --color-brand-400: #a46cfb;
+  --color-brand-500: #8b3ff5;
+  --color-brand-600: #7a24ea;
+  --color-brand-700: #6518c8;
+  --color-brand-800: #5318a0;
+  --color-brand-900: #431a7e;
+
+  --color-sidebar: #16161b;
+  --color-surface: #f5f5f8;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--color-surface);
+  color: #1c1c24;
+}
+
+/* Slim, unobtrusive scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #d4d4dc transparent;
+}
