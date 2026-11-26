@@ -1,18 +1,17 @@
 "use client";
 
-import { Bell, HelpCircle, Menu, Settings } from "lucide-react";
+import { Menu } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { Suspense } from "react";
-import { Avatar } from "@/components/ui/Avatar";
 import { IconButton } from "@/components/ui/IconButton";
 import { SearchInput } from "./SearchInput";
+import { ThemeToggle } from "./ThemeToggle";
 
 interface TopbarProps {
-  userName: string;
   onMenuClick: () => void;
 }
 
-export function Topbar({ userName, onMenuClick }: TopbarProps) {
+export function Topbar({ onMenuClick }: TopbarProps) {
   const pathname = usePathname();
 
   return (
@@ -22,23 +21,11 @@ export function Topbar({ userName, onMenuClick }: TopbarProps) {
       </IconButton>
 
       {/* Keyed by pathname so the input resets when navigating between pages */}
-      <Suspense fallback={<div className="h-10 w-full max-w-xs rounded-lg bg-zinc-100" />}>
+      <Suspense fallback={<div className="h-11 w-full max-w-md rounded-xl bg-zinc-100" />}>
         <SearchInput key={pathname} />
       </Suspense>
-
-      <div className="ml-auto flex items-center gap-1">
-        <IconButton label="Help" className="hidden sm:inline-flex">
-          <HelpCircle className="size-[18px]" />
-        </IconButton>
-        <IconButton label="Settings">
-          <Settings className="size-[18px]" />
-        </IconButton>
-        <IconButton label="Notifications" badge>
-          <Bell className="size-[18px]" />
-        </IconButton>
-        <button type="button" aria-label={`Account: ${userName}`} className="ml-2 rounded-full">
-          <Avatar name={userName} />
-        </button>
+      <div className="ml-auto">
+        <ThemeToggle />
       </div>
     </div>
   );

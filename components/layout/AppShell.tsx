@@ -6,34 +6,34 @@ import { Topbar } from "./Topbar";
 
 interface AppShellProps {
   userName: string;
+  userEmail: string;
+  userImage?: string | null;
   /** Right-hand panel (e.g. cloud storage summary) */
   aside?: ReactNode;
   children: ReactNode;
 }
 
-export function AppShell({ userName, aside, children }: AppShellProps) {
+export function AppShell({ userName, userEmail, userImage, aside, children }: AppShellProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="flex h-dvh overflow-hidden bg-surface lg:p-5">
-      <div className="flex w-full overflow-hidden bg-white lg:rounded-3xl lg:shadow-xl lg:shadow-zinc-300/40">
-        <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+    <div className="grid h-dvh w-full grid-cols-1 overflow-hidden bg-surface lg:grid-cols-[272px_minmax(0,1fr)] min-[1200px]:grid-cols-[272px_minmax(0,1fr)_400px]">
+      <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} userName={userName} userEmail={userEmail} userImage={userImage} />
 
-        <div className="flex min-w-0 flex-1 flex-col">
-          <Topbar userName={userName} onMenuClick={() => setSidebarOpen(true)} />
+      <div className="dashboard-workspace flex min-h-0 min-w-0 flex-col overflow-hidden">
+        <Topbar onMenuClick={() => setSidebarOpen(true)} />
 
-          <div className="flex min-h-0 flex-1 flex-col overflow-y-auto xl:flex-row xl:overflow-hidden">
-            <main className="min-w-0 flex-1 px-4 py-6 sm:px-6 xl:overflow-y-auto">{children}</main>
+        <div className="flex min-h-0 flex-1 overflow-hidden">
+          <main className="min-h-0 min-w-0 flex-1 overflow-y-auto px-4 py-6 sm:px-6 xl:px-8 xl:py-7">{children}</main>
 
-            {aside && (
-              <aside
-                aria-label="Storage overview"
-                className="w-full shrink-0 border-t border-zinc-100 xl:w-[340px] xl:overflow-y-auto xl:border-l xl:border-t-0"
-              >
-                {aside}
-              </aside>
-            )}
-          </div>
+          {aside && (
+            <aside
+              aria-label="Storage overview"
+              className="hidden min-h-0 w-[400px] shrink-0 overflow-y-auto border-l border-zinc-100 min-[1200px]:block"
+            >
+              {aside}
+            </aside>
+          )}
         </div>
       </div>
     </div>

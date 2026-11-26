@@ -23,11 +23,12 @@ function pickPalette(name: string): string {
 
 interface AvatarProps {
   name: string;
+  image?: string | null;
   size?: AvatarSize;
   className?: string;
 }
 
-export function Avatar({ name, size = "md", className }: AvatarProps) {
+export function Avatar({ name, image, size = "md", className }: AvatarProps) {
   return (
     <span
       aria-hidden
@@ -38,7 +39,9 @@ export function Avatar({ name, size = "md", className }: AvatarProps) {
         className,
       )}
     >
-      {getInitials(name)}
+      {image ? (
+        <span className="size-full rounded-full bg-cover bg-center" style={{ backgroundImage: `url("${image}")` }} />
+      ) : getInitials(name)}
     </span>
   );
 }

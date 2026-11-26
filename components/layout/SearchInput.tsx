@@ -33,15 +33,15 @@ export function SearchInput() {
   }
 
   return (
-    <label className="relative block w-full max-w-xs">
+    <label className="relative block w-full max-w-md">
       <span className="sr-only">Search your files</span>
-      <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-zinc-400" />
+      <Search className="pointer-events-none absolute left-4 top-1/2 size-5 -translate-y-1/2 text-zinc-400" />
       <input
         type="search"
         value={value}
         onChange={handleChange}
         placeholder="Search your file"
-        className="h-10 w-full rounded-lg bg-zinc-100 pl-9 pr-3 text-sm text-zinc-800 outline-none ring-brand-500/40 transition placeholder:text-zinc-400 focus:bg-white focus:ring-2"
+        className="h-11 w-full rounded-xl bg-zinc-100 pl-11 pr-4 text-[15px] text-zinc-800 outline-none ring-brand-500/40 transition placeholder:text-zinc-400 focus:bg-white focus:ring-2"
       />
     </label>
   );

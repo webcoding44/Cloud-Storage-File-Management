@@ -7,7 +7,7 @@ export interface NavItem {
 }
 
 export const PRIMARY_NAV: readonly NavItem[] = [
-  { label: "My Drive", href: "/", icon: Folder },
+  { label: "My Drive", href: "/dashboard", icon: Folder },
   { label: "Shared with Me", href: "/shared", icon: Users },
   { label: "Recent", href: "/recent", icon: Clock },
   { label: "Favourite", href: "/favourites", icon: Star },
@@ -15,5 +15,5 @@ export const PRIMARY_NAV: readonly NavItem[] = [
 ];
 
 export function isNavItemActive(item: NavItem, pathname: string): boolean {
-  return item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
+  return pathname === item.href || pathname.startsWith(`${item.href}/`);
 }
