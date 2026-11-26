@@ -19,6 +19,11 @@ const byModifiedDesc = (a: DriveItem, b: DriveItem) =>
 
 const VIEW_PREDICATES: Record<DriveView, (item: DriveItem) => boolean> = {
   "my-drive": (item) => !item.trashed && item.owner.id === CURRENT_USER.id,
+  images: (item) => !item.trashed && item.owner.id === CURRENT_USER.id && item.kind === "image",
+  video: (item) => !item.trashed && item.owner.id === CURRENT_USER.id && item.kind === "video",
+  files: (item) => !item.trashed && item.owner.id === CURRENT_USER.id && ["document", "spreadsheet", "pdf"].includes(item.kind),
+  "other-files": (item) => !item.trashed && item.owner.id === CURRENT_USER.id && ["archive", "other"].includes(item.kind),
+  audio: (item) => !item.trashed && item.owner.id === CURRENT_USER.id && item.kind === "audio",
   shared: (item) => !item.trashed && item.owner.id !== CURRENT_USER.id,
   recent: (item) => !item.trashed,
   favourites: (item) => !item.trashed && item.starred,

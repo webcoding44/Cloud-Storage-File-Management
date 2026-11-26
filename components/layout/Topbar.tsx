@@ -16,7 +16,7 @@ export function Topbar({ onMenuClick }: TopbarProps) {
 
   return (
     <div className="flex h-[72px] shrink-0 items-center gap-3 border-b border-zinc-100 bg-white px-4 sm:px-6">
-      <IconButton label="Open menu" onClick={onMenuClick} className="lg:hidden">
+      <IconButton label="Open menu" onClick={onMenuClick} className="md:hidden">
         <Menu className="size-5" />
       </IconButton>
 

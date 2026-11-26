@@ -47,6 +47,52 @@ html.dark body {
   color: #f4f4f5;
 }
 
+.sidebar-shell { overflow: visible; scrollbar-width: none; }
+.sidebar-shell::-webkit-scrollbar, .sidebar-shell nav::-webkit-scrollbar { display: none; }
+.sidebar-is-collapsed .sidebar-brand-wrap { justify-content: center; width: 100%; }
+.sidebar-is-collapsed .sidebar-brand-wrap > div { padding-inline: 0; }
+.sidebar-is-collapsed .sidebar-brand-copy,
+.sidebar-is-collapsed .sidebar-nav-label,
+.sidebar-is-collapsed .sidebar-user-meta,
+.sidebar-is-collapsed .sidebar-user-chevron { display: none; }
+.sidebar-is-collapsed nav { width: 100%; }
+.sidebar-is-collapsed .sidebar-nav-link { justify-content: center; padding-inline: 0; }
+.sidebar-is-collapsed .sidebar-account { width: 100%; }
+.sidebar-is-collapsed .sidebar-account-button { justify-content: center; padding-inline: 0; }
+.sidebar-is-collapsed .sidebar-account-menu { left: calc(100% + 12px); right: auto; bottom: 0; width: 220px; }
+
+@media (max-height: 560px) {
+  .sidebar-shell { padding-top: 12px; padding-bottom: 10px; }
+  .sidebar-shell nav { margin-top: 12px; gap: 2px; }
+  .sidebar-nav-link { height: 38px; }
+  .sidebar-account { padding-top: 6px; }
+  .sidebar-account-button { padding: 4px; }
+  .sidebar-account-button .size-10 { width: 32px; height: 32px; }
+  .sidebar-user-email { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sidebar-shell *, .sidebar-shell *::before, .sidebar-shell *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.sidebar-illustration-slot .auth-illustration {
+  display: block;
+  width: 320px;
+  max-width: none;
+  height: 245px;
+  flex: 0 0 auto;
+  margin: 0;
+  transform: scale(0.7);
+  transform-origin: center;
+}
+
+.sidebar-is-collapsed .sidebar-illustration-slot { display: none; }
+
 html:not(.dark) .theme-toggle-sun,
 html.dark .theme-toggle-moon {
   display: none;

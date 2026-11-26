@@ -1,4 +1,4 @@
-import { Clock, Folder, Star, Trash2, Users, type LucideIcon } from "lucide-react";
+import { AudioLines, Clapperboard, FileStack, FolderArchive, Images, LayoutDashboard, type LucideIcon } from "lucide-react";
 
 export interface NavItem {
   label: string;
@@ -7,11 +7,12 @@ export interface NavItem {
 }
 
 export const PRIMARY_NAV: readonly NavItem[] = [
-  { label: "My Drive", href: "/dashboard", icon: Folder },
-  { label: "Shared with Me", href: "/shared", icon: Users },
-  { label: "Recent", href: "/recent", icon: Clock },
-  { label: "Favourite", href: "/favourites", icon: Star },
-  { label: "Trash", href: "/trash", icon: Trash2 },
+  { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { label: "Images", href: "/images", icon: Images },
+  { label: "Video", href: "/video", icon: Clapperboard },
+  { label: "Audio", href: "/audio", icon: AudioLines },
+  { label: "Files", href: "/files", icon: FileStack },
+  { label: "Other Files", href: "/other-files", icon: FolderArchive },
 ];
 
 export function isNavItemActive(item: NavItem, pathname: string): boolean {

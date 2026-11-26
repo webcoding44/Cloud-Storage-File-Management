@@ -9,7 +9,7 @@ export type FileKind =
   | "archive"
   | "other";
 
-export type DriveView = "my-drive" | "shared" | "recent" | "favourites" | "trash";
+export type DriveView = "my-drive" | "images" | "video" | "files" | "other-files" | "audio" | "shared" | "recent" | "favourites" | "trash";
 
 export interface DriveOwner {
   id: string;

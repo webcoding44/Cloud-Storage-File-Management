@@ -1,24 +1,27 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { ChevronDown, LogOut, UserRound, X } from "lucide-react";
+import { ChevronDown, LogOut, PanelLeftClose, PanelLeftOpen, UserRound, X } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { PRIMARY_NAV, isNavItemActive } from "@/constants/navigation";
 import { Avatar } from "@/components/ui/Avatar";
 import { authClient } from "@/src/auth/client";
+import { AuthIllustration } from "@/components/auth/AuthIllustration";
 import { Brand } from "./Brand";
 import { SidebarNavItem } from "./SidebarNavItem";
 
 interface SidebarProps {
   open: boolean;
+  collapsed: boolean;
   onClose: () => void;
+  onToggleCollapse: () => void;
   userName: string;
   userEmail: string;
   userImage?: string | null;
 }
 
-export function Sidebar({ open, onClose, userName, userEmail, userImage }: SidebarProps) {
+export function Sidebar({ open, collapsed, onClose, onToggleCollapse, userName, userEmail, userImage }: SidebarProps) {
   const pathname = usePathname();
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
@@ -27,6 +30,27 @@ export function Sidebar({ open, onClose, userName, userEmail, userImage }: Sideb
   const [image, setImage] = useState(userImage || "");
   const [pending, setPending] = useState(false);
   const [message, setMessage] = useState("");
+  const accountRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+        onClose();
+      }
+    }
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [onClose]);
+
+  useEffect(() => {
+    function onPointerDown(event: PointerEvent) {
+      const target = event.target as Node;
+      if (!accountRef.current?.contains(target)) setMenuOpen(false);
+    }
+    document.addEventListener("pointerdown", onPointerDown);
+    return () => document.removeEventListener("pointerdown", onPointerDown);
+  }, []);
 
   async function selectProfileImage(file?: File) {
     if (!file) return;
@@ -86,31 +110,48 @@ export function Sidebar({ open, onClose, userName, userEmail, userImage }: Sideb
     <>
       <div
         aria-hidden
-        onClick={onClose}
+        onClick={() => { setMenuOpen(false); onClose(); }}
         className={cn(
-          "fixed inset-0 z-40 bg-black/50 transition-opacity lg:hidden",
+          "fixed inset-0 z-40 bg-black/50 transition-opacity md:hidden",
           open ? "opacity-100" : "pointer-events-none opacity-0",
         )}
       />
 
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-50 flex w-[272px] shrink-0 flex-col bg-sidebar px-4 py-6 transition-transform duration-200",
-          "lg:static lg:translate-x-0",
+          cn(
+            "sidebar-shell fixed inset-y-0 left-0 z-50 flex h-dvh w-[272px] shrink-0 flex-col overflow-visible bg-gradient-to-b from-[#19191f] to-[#141419] px-4 py-5 shadow-[12px_0_36px_rgba(12,10,24,0.16)] transition-[width,transform,padding] duration-300 ease-in-out md:static md:translate-x-0 motion-reduce:transition-none",
+            collapsed && "sidebar-is-collapsed md:w-[76px] md:items-center md:px-2",
+          ),
           open ? "translate-x-0" : "-translate-x-full",
         )}
       >
-        <Brand />
+        <div className={cn("sidebar-brand-wrap flex shrink-0 items-center px-1", collapsed ? "h-[76px] flex-col justify-center gap-2" : "h-11 justify-between")}>
+          <Brand />
+          <button
+            type="button"
+            onClick={onToggleCollapse}
+            aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+            title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+            className="sidebar-collapse-toggle hidden size-8 shrink-0 place-items-center rounded-lg text-zinc-400 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 md:grid"
+          >
+            {collapsed ? <PanelLeftOpen className="size-[18px]" /> : <PanelLeftClose className="size-[18px]" />}
+          </button>
+        </div>
 
-        <nav aria-label="Main navigation" className="mt-10 flex flex-1 flex-col gap-1.5">
+        <nav aria-label="Main navigation" className="mt-12 flex min-h-0 flex-col gap-1">
           {PRIMARY_NAV.map((item) => (
             <SidebarNavItem key={item.href} item={item} active={isNavItemActive(item, pathname)} onNavigate={onClose} />
           ))}
         </nav>
 
-        <div className="relative mt-auto border-t border-white/10 pt-4">
+        <div className="sidebar-illustration-slot flex min-h-0 flex-1 items-center justify-center overflow-hidden">
+          <AuthIllustration />
+        </div>
+
+        <div ref={accountRef} className="sidebar-account relative mt-auto shrink-0 border-t border-white/10 pt-3">
           {menuOpen && (
-            <div className="absolute inset-x-0 bottom-[calc(100%+12px)] z-[60] overflow-hidden rounded-xl border border-white/10 bg-[#222229] p-2 shadow-2xl shadow-black/40">
+            <div className="sidebar-account-menu absolute inset-x-0 bottom-[calc(100%+12px)] z-[60] overflow-hidden rounded-xl border border-white/10 bg-[#222229] p-2 shadow-2xl shadow-black/40">
               {editing ? (
                 <form onSubmit={saveProfile} className="space-y-3 p-2">
                   <div className="flex items-center justify-between text-sm font-semibold text-white">
@@ -150,13 +191,13 @@ export function Sidebar({ open, onClose, userName, userEmail, userImage }: Sideb
               )}
             </div>
           )}
-          <button type="button" aria-expanded={menuOpen} onClick={() => { setMenuOpen((value) => !value); setEditing(false); }} className="flex w-full items-center gap-3 rounded-xl p-2 text-left transition-colors hover:bg-white/[0.07]">
+          <button type="button" aria-haspopup="menu" aria-expanded={menuOpen} onClick={() => { setMenuOpen((value) => !value); setEditing(false); }} className="sidebar-account-button flex w-full items-center gap-3 rounded-xl p-2 text-left transition-colors hover:bg-white/[0.07] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400">
             <Avatar name={userName} image={userImage} className="size-10 text-xs" />
-            <span className="min-w-0 flex-1">
+            <span className="sidebar-user-meta min-w-0 flex-1">
               <span className="block truncate text-sm font-semibold text-white">{userName}</span>
-              <span className="block truncate text-xs text-zinc-400">{userEmail}</span>
+              <span className="sidebar-user-email block truncate text-xs text-zinc-400">{userEmail}</span>
             </span>
-            <ChevronDown className={cn("size-4 text-zinc-400 transition-transform", menuOpen && "rotate-180")} />
+            <ChevronDown className={cn("sidebar-user-chevron size-4 text-zinc-400 transition-transform", menuOpen && "rotate-180")} />
           </button>
         </div>
       </aside>

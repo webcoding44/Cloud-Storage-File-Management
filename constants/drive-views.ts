@@ -10,14 +10,19 @@ export interface DriveViewConfig {
 
 export const DRIVE_VIEWS: Record<DriveView, DriveViewConfig> = {
   "my-drive": {
-    title: "My Drive",
+    title: "Dashboard",
     description: "All the files and folders you own.",
     listTitle: "All Files",
     emptyTitle: "No files found",
     emptyDescription: "Upload a file or create a folder to get started.",
   },
+  images: { title: "Images", description: "All your image files in one place.", listTitle: "Image Files", emptyTitle: "No images yet", emptyDescription: "Images you upload will appear here." },
+  video: { title: "Video", description: "Your video files, gathered in one place.", listTitle: "Video Files", emptyTitle: "No videos yet", emptyDescription: "Videos you upload will appear here." },
+  files: { title: "Files", description: "Documents, spreadsheets and PDFs.", listTitle: "Documents & Files", emptyTitle: "No files yet", emptyDescription: "Documents and other standard files will appear here." },
+  "other-files": { title: "Other Files", description: "Archives and other file types.", listTitle: "Other Files", emptyTitle: "No other files yet", emptyDescription: "Archive and other file types will appear here." },
+  audio: { title: "Audio", description: "Your audio files in one place.", listTitle: "Audio Files", emptyTitle: "No audio files yet", emptyDescription: "Audio files you upload will appear here." },
   shared: {
-    title: "Shared with Me",
+    title: "Shared",
     description: "Files and folders other people shared with you.",
     listTitle: "Shared Files",
     emptyTitle: "Nothing shared with you yet",
@@ -31,7 +36,7 @@ export const DRIVE_VIEWS: Record<DriveView, DriveViewConfig> = {
     emptyDescription: "Files you work on will appear here.",
   },
   favourites: {
-    title: "Favourite",
+    title: "Favorites",
     description: "Quick access to the files you starred.",
     listTitle: "Starred Files",
     emptyTitle: "No favourites yet",

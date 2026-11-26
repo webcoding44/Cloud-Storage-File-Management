@@ -5,18 +5,15 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
   ArrowRight,
-  Check,
   Cloud,
   Eye,
   EyeOff,
-  FileText,
-  Image as ImageIcon,
   LoaderCircle,
   LockKeyhole,
   ShieldCheck,
-  UploadCloud,
 } from "lucide-react";
 import { authClient } from "@/src/auth/client";
+import { AuthIllustration } from "./AuthIllustration";
 
 type AuthMode = "signup" | "signin";
 
@@ -98,31 +95,7 @@ export function AuthPage({ mode }: { mode: AuthMode }) {
           </p>
         </div>
 
-        <div className="auth-illustration" aria-hidden="true">
-          <div className="auth-orbit auth-orbit-one" />
-          <div className="auth-orbit auth-orbit-two" />
-          <div className="auth-paper auth-paper-left">
-            <FileText size={28} />
-            <span /><span />
-            <i><ImageIcon size={22} /></i>
-          </div>
-          <div className="auth-paper auth-paper-right">
-            <ImageIcon size={32} />
-            <span /><span />
-          </div>
-          <div className="auth-file-card">
-            <div className="auth-file-glow" />
-            <div className="auth-file-window">
-              <span className="auth-file-topline" />
-              <UploadCloud className="auth-upload-icon" size={55} strokeWidth={1.5} />
-              <div className="auth-file-lines"><span /><span /></div>
-            </div>
-            <span className="auth-file-check"><Check size={24} strokeWidth={3} /></span>
-          </div>
-          <span className="auth-spark auth-spark-one" />
-          <span className="auth-spark auth-spark-two" />
-          <span className="auth-spark auth-spark-three" />
-        </div>
+        <AuthIllustration />
 
         <div className="auth-story-footer">
           <ShieldCheck size={18} />
