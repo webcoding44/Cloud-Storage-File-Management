@@ -7,12 +7,12 @@ export function formatBytes(bytes: number): string {
   let value = bytes;
   let unitIndex = 0;
 
-  while (value >= 1024 && unitIndex < BYTE_UNITS.length - 1) {
-    value /= 1024;
+  while (value >= 1000 && unitIndex < BYTE_UNITS.length - 1) {
+    value /= 1000;
     unitIndex += 1;
   }
 
-  const fractionDigits = unitIndex === 0 ? 0 : unitIndex >= 3 ? 2 : value >= 100 ? 0 : 1;
+  const fractionDigits = unitIndex === 0 ? 0 : value >= 100 ? 0 : 1;
   return `${value.toFixed(fractionDigits)} ${BYTE_UNITS[unitIndex]}`;
 }
 

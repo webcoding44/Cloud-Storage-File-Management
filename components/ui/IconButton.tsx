@@ -15,8 +15,8 @@ export function IconButton({ label, children, badge = false, className, type = "
       aria-label={label}
       title={label}
       className={cn(
-        "relative inline-flex size-9 items-center justify-center rounded-lg text-zinc-500 transition-colors",
-        "hover:bg-zinc-100 hover:text-zinc-900 focus-visible:outline-2 focus-visible:outline-brand-500",
+        "relative inline-flex size-9 items-center justify-center rounded-lg text-zinc-500 transition-[color,background-color,transform] duration-150 active:scale-[0.97] motion-reduce:transition-none motion-reduce:transform-none",
+        "hover:bg-zinc-100 hover:text-zinc-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400 focus-visible:ring-offset-2",
         className,
       )}
       {...props}

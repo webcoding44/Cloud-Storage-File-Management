@@ -41,7 +41,7 @@ export function SearchInput() {
         value={value}
         onChange={handleChange}
         placeholder="Search your file"
-        className="h-11 w-full rounded-xl bg-zinc-100 pl-11 pr-4 text-[15px] text-zinc-800 outline-none ring-brand-500/40 transition placeholder:text-zinc-400 focus:bg-white focus:ring-2"
+        className="h-11 w-full rounded-xl border border-zinc-200 bg-white pl-11 pr-4 text-sm text-zinc-800 outline-none transition-[border-color,box-shadow] duration-150 placeholder:text-zinc-400 focus:border-brand-400 focus:ring-4 focus:ring-brand-100"
       />
     </label>
   );

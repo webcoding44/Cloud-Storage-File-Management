@@ -13,6 +13,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { authClient } from "@/src/auth/client";
+import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { AuthIllustration } from "./AuthIllustration";
 
 type AuthMode = "signup" | "signin";
@@ -79,13 +80,16 @@ export function AuthPage({ mode }: { mode: AuthMode }) {
   return (
     <main className="auth-page">
       <section className="auth-story" aria-label="CloudNest introduction">
-        <Link className="auth-brand" href="/" aria-label="CloudNest home">
-          <span className="auth-brand-mark"><Cloud size={29} strokeWidth={2.2} /></span>
-          <span className="auth-brand-copy">
-            <strong>CloudNest</strong>
-            <span>CLOUD STORAGE</span>
-          </span>
-        </Link>
+        <div className="auth-story-topline">
+          <Link className="auth-brand" href="/" aria-label="CloudNest home">
+            <span className="auth-brand-mark"><Cloud size={29} strokeWidth={2.2} /></span>
+            <span className="auth-brand-copy">
+              <strong>CloudNest</strong>
+              <span>CLOUD STORAGE</span>
+            </span>
+          </Link>
+          <ThemeToggle />
+        </div>
 
         <div className="auth-story-copy">
           <p className="auth-eyebrow">PRIVATE CLOUD WORKSPACE</p>

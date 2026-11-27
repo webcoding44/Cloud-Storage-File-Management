@@ -44,7 +44,7 @@ export async function DriveViewPage({ view, query }: DriveViewPageProps) {
   const isHome = view === "my-drive";
 
   return (
-    <>
+    <div className="page-enter">
       <PageHeader title={config.title} description={isHome ? undefined : config.description} actions={<ViewActions view={view} />} />
 
       {isHome && (
@@ -61,6 +61,6 @@ export async function DriveViewPage({ view, query }: DriveViewPageProps) {
         emptyTitle={query ? "No results found" : config.emptyTitle}
         emptyDescription={query ? `Nothing matches “${query}”.` : config.emptyDescription}
       />
-    </>
+    </div>
   );
 }

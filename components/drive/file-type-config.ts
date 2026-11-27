@@ -20,13 +20,13 @@ interface FileKindStyle {
 }
 
 export const FILE_KIND_STYLES: Record<FileKind, FileKindStyle> = {
-  folder: { icon: Folder, tile: "bg-amber-50", glyph: "text-amber-500 fill-amber-300" },
-  document: { icon: FileText, tile: "bg-blue-50", glyph: "text-blue-500" },
-  spreadsheet: { icon: FileSpreadsheet, tile: "bg-emerald-50", glyph: "text-emerald-500" },
-  pdf: { icon: FileText, tile: "bg-red-50", glyph: "text-red-500" },
-  image: { icon: FileImage, tile: "bg-rose-50", glyph: "text-rose-500" },
-  video: { icon: FileVideo, tile: "bg-red-50", glyph: "text-red-500" },
-  audio: { icon: FileAudio, tile: "bg-rose-50", glyph: "text-rose-500" },
-  archive: { icon: FileArchive, tile: "bg-violet-50", glyph: "text-violet-500" },
-  other: { icon: FileGeneric, tile: "bg-zinc-100", glyph: "text-zinc-500" },
+  folder: { icon: Folder, tile: "bg-brand-50", glyph: "text-brand-600 fill-brand-200" },
+  document: { icon: FileText, tile: "bg-category-document-soft", glyph: "text-category-document" },
+  spreadsheet: { icon: FileSpreadsheet, tile: "bg-category-document-soft", glyph: "text-category-document" },
+  pdf: { icon: FileText, tile: "bg-category-document-soft", glyph: "text-category-document" },
+  image: { icon: FileImage, tile: "bg-category-image-soft", glyph: "text-category-image" },
+  video: { icon: FileVideo, tile: "bg-category-video-soft", glyph: "text-category-video" },
+  audio: { icon: FileAudio, tile: "bg-category-audio-soft", glyph: "text-category-audio" },
+  archive: { icon: FileArchive, tile: "bg-category-other-soft", glyph: "text-category-other" },
+  other: { icon: FileGeneric, tile: "bg-category-other-soft", glyph: "text-category-other" },
 };

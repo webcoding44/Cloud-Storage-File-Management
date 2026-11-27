@@ -22,16 +22,13 @@ export function AppShell({ userName, userEmail, userImage, children }: AppShellP
         collapsed={sidebarCollapsed}
         onClose={() => setSidebarOpen(false)}
         onToggleCollapse={() => setSidebarCollapsed((value) => !value)}
-        userName={userName}
-        userEmail={userEmail}
-        userImage={userImage}
       />
 
       <div className="dashboard-workspace flex min-h-0 min-w-0 flex-col overflow-hidden">
-        <Topbar onMenuClick={() => setSidebarOpen(true)} />
+        <Topbar onMenuClick={() => setSidebarOpen(true)} userName={userName} userEmail={userEmail} userImage={userImage} />
 
         <div className="flex min-h-0 flex-1 overflow-hidden">
-          <main className="min-h-0 min-w-0 flex-1 overflow-y-auto px-4 pb-6 pt-10 sm:px-6 xl:px-8 xl:pb-7 xl:pt-10">{children}</main>
+          <main className="min-h-0 min-w-0 flex-1 overflow-y-auto px-4 pb-6 pt-6 sm:px-6 xl:px-8 xl:pb-7 xl:pt-6">{children}</main>
 
         </div>
       </div>
